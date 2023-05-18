@@ -1,0 +1,26 @@
+// sass - 스타일 변수
+$bg: #fff;
+$titleSize: 20px;
+$titleColor: #333;
+$interval: 0.2s;
+
+// sass - mixin
+@mixin button($bg: #555, $width: 100px, $height: 30px) {
+	display: block;
+	width: $width;
+	height: $height;
+	background: $bg;
+	border-radius: $height/2;
+	text-align: center;
+	color: #fff;
+	line-height: $height;
+	margin-top: 15px;
+}
+
+// 규칙이 없는 반복문을 위한 그룹핑
+$titleColors: (
+	1: #333,
+	2: #555,
+	3: #777,
+	4: #999,
+);

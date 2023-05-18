@@ -1,0 +1,81 @@
+@import 'variable';
+
+body {
+	background: #eee;
+
+	.wrap {
+		width: 100%;
+		padding: 50px;
+
+		&::after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+
+		.item {
+			float: left;
+			width: 300px;
+			padding: 20px;
+			margin: 10px;
+			background: $bg;
+			border-radius: 10px;
+			box-shadow: 5px 5px 20px #ddd;
+
+			transform: translateY(200px);
+			opacity: 0;
+			transition-property: opacity transform;
+			transition-duration: 1s;
+
+			// @for 반복문 (규칙성이 있는 반복문 처리)
+			// sass에서 반복문 처리 시 중괄호 안쪽은 변수 치환이 가능하다.
+			// 선택자에서는 #{}로 감싸주어야 치환이 가능하다.
+			@for $i from 0 through 3 {
+				&:nth-of-type(#{1 + $i}) {
+					transition-delay: $interval * $i;
+				}
+			}
+
+			// @each 반복문 (규칙성이 없는 반복문 처리)
+			@each $key, $value in $titleColors {
+				&:nth-of-type(#{$key}) {
+					h2 {
+						color: $value;
+					}
+				}
+			}
+
+			/* 
+			&:nth-of-type(1) {
+				transition-delay: 0s;
+			}
+			&:nth-of-type(2) {
+				transition-delay: 0.2s;
+			}
+			&:nth-of-type(3) {
+				transition-delay: 0.4s;
+			}
+			&:nth-of-type(4) {
+				transition-delay: 0.6s;
+			} 
+			*/
+
+			h2 {
+				font-family: 'arial';
+				font-size: $titleSize;
+				color: $titleColor;
+				margin-bottom: 15px;
+			}
+
+			a {
+				@include button();
+			}
+		}
+
+		// item on style
+		.item.on {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+}
